@@ -1,7 +1,6 @@
 package services
 
 import (
-	"fmt"
 	"go-learning/01_helloworld/model"
 	"user-service/backend"
 	"user-service/models"
@@ -20,8 +19,6 @@ func (userService UserService) CreateUser(user models.User) {
 	err := con.Ping()
 	if err != nil {
 		panic(err.Error()) // proper error handling instead of panic in your app
-	} else {
-		fmt.Println("connection successfull")
 	}
 	stmtIns, err := con.Prepare("INSERT INTO User VALUES( ?, ?,?,? )") // ? = placeholder
 	_, err = stmtIns.Exec(user.Id, user.Name, user.Gender, user.Age)
@@ -41,8 +38,6 @@ func (userService UserService) GetUser(Id string) models.User {
 	err := con.Ping()
 	if err != nil {
 		panic(err.Error()) // proper error handling instead of panic in your app
-	} else {
-		fmt.Println("connection successfull")
 	}
 	stmtOut, err := con.Prepare("Select Id,Name,Gender,Age FROM User where id = ?") // ? = placeholder
 	if err != nil {
