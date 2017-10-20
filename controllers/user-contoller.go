@@ -51,12 +51,21 @@ func (userRestController UserRestController) CreateUser(w http.ResponseWriter, r
 
 	newuser := models.User{}
 	json.NewDecoder(r.Body).Decode(&newuser)
-	fmt.Println(newuser)
 	userService.CreateUser(newuser)
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 
 	uj, _ := json.Marshal(&newuser)
 	fmt.Fprintf(w, "%s", uj)
+
+}
+
+func (userRestController UserRestController) GetAllUsers(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
+
+	users := userService.GetAllUsers()
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	uj, _ := json.Marshal(&users)
+	w.Write([]byte(uj))
 
 }
