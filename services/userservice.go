@@ -1,9 +1,10 @@
 package services
 
 import (
-	"go-learning/01_helloworld/model"
-	"user-service/backend"
+	"database/sql"
 	"user-service/models"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 type UserService struct {
@@ -15,7 +16,7 @@ func NewuserService() *UserService {
 
 func (userService UserService) CreateUser(user models.User) {
 
-	con := backend.GetNewDBConnection()
+	con := getNewDBConnection()
 	err := con.Ping()
 	if err != nil {
 		panic(err.Error()) // proper error handling instead of panic in your app
@@ -33,7 +34,7 @@ func (userService UserService) CreateUser(user models.User) {
 func (userService UserService) GetUser(Id string) models.User {
 
 	var user models.User
-	con := backend.GetNewDBConnection()
+	con := getNewDBConnection()
 
 	err := con.Ping()
 	if err != nil {
@@ -55,6 +56,18 @@ func (userService UserService) GetUser(Id string) models.User {
 	return user
 }
 
-func (userService UserService) GetAllUser() []model.User {
+func (userService UserService) GetAllUser() []models.User {
 	return nil
+
+}
+
+func getNewDBConnection() *sql.DB {
+
+	db, err := sql.Open("mysql", "root:nagu123@/gotest")
+
+	if err != nil {
+		panic(err.Error()) // Just for example purpose. You should use proper error handling instead of panic
+	}
+	return db
+
 }
