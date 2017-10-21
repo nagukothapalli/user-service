@@ -6,3 +6,10 @@ type User struct {
 	Gender string `json:"gender"`
 	Age    int    `json:"age"`
 }
+
+type UserRestResponse struct {
+	Error      bool        `json:"error"`
+	StatusCode int         `json:"code"`
+	Message    string      `json:"message"`
+	Data       interface{} `json:"response"`
+}

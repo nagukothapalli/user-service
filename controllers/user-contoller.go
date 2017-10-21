@@ -36,13 +36,13 @@ func (userRestController UserRestController) Index(w http.ResponseWriter, r *htt
 func (userRestController UserRestController) GetUserById(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 
 	id := params.ByName("id")
-	user := userService.GetUser(id)
+	userResponse := userService.GetUser(id)
 	// Marshal provided interface into JSON structure
-	uj, _ := json.Marshal(user)
+	uj, _ := json.Marshal(&userResponse)
 
 	// Write content-type, statuscode, payload
 	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
+	w.WriteHeader(userResponse.StatusCode)
 	fmt.Fprintf(w, "%s", uj)
 }
 
@@ -51,21 +51,25 @@ func (userRestController UserRestController) CreateUser(w http.ResponseWriter, r
 
 	newuser := models.User{}
 	json.NewDecoder(r.Body).Decode(&newuser)
-	userService.CreateUser(newuser)
+	userResponse := userService.CreateUser(newuser)
 	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusCreated)
+	w.WriteHeader(userResponse.StatusCode)
 
-	uj, _ := json.Marshal(&newuser)
+	uj, _ := json.Marshal(&userResponse)
 	fmt.Fprintf(w, "%s", uj)
 
 }
 
 func (userRestController UserRestController) GetAllUsers(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 
-	users := userService.GetAllUsers()
+	userResponse := userService.GetAllUsers()
 	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	uj, _ := json.Marshal(&users)
+	w.WriteHeader(userResponse.StatusCode)
+	uj, _ := json.Marshal(&userResponse)
 	w.Write([]byte(uj))
+
+}
+
+func (userRestController UserRestController) UpdateUser(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 
 }

@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	createuserEndpoint = "http://localhost:8080/create/"
+	createuserEndpoint = "http://localhost:8080/api/create/"
 	userJSON           = "{\"Name\":\"#ID - Nagu Kothapalli\",\"Gender\":\"male\",\"Age\":25,\"Id\":\"#ID\"}"
 )
 

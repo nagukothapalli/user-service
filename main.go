@@ -14,9 +14,9 @@ func main() {
 	//Building the Router
 	router := httprouter.New()
 	router.GET("/", userRestController.Index)
-	router.GET("/user/:id", userRestController.GetUserById)
-	router.GET("/users/all", userRestController.GetAllUsers)
-	router.POST("/create", userRestController.CreateUser)
+	router.GET("/api/user/:id", userRestController.GetUserById)
+	router.GET("/api/users/all", userRestController.GetAllUsers)
+	router.POST("/api/create", userRestController.CreateUser)
 	http.ListenAndServe(":8080", router)
 
 }
