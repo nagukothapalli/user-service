@@ -12,7 +12,7 @@ import (
 
 const (
 	createuserEndpoint = "http://localhost:8080/create/"
-	userJson           = "{\"Name\":\"#ID - Nagu Kothapalli\",\"Gender\":\"male\",\"Age\":25,\"Id\":\"#ID\"}"
+	userJSON           = "{\"Name\":\"#ID - Nagu Kothapalli\",\"Gender\":\"male\",\"Age\":25,\"Id\":\"#ID\"}"
 )
 
 func main() {
@@ -28,7 +28,7 @@ func main() {
 
 func createuserTest(id int) {
 
-	req, err := http.NewRequest("POST", createuserEndpoint, bytes.NewBuffer([]byte(strings.Replace(userJson, "#ID", strconv.Itoa(id), -1))))
+	req, err := http.NewRequest("POST", createuserEndpoint, bytes.NewBuffer([]byte(strings.Replace(userJSON, "#ID", strconv.Itoa(id), -1))))
 	req.Header.Set("Content-Type", "application/json")
 
 	client := &http.Client{}
