@@ -46,7 +46,7 @@ func (userRestController UserRestController) GetUserById(w http.ResponseWriter, 
 	fmt.Fprintf(w, "%s", uj)
 }
 
-//curl -vvv -H "Content-Type: application/json" -X POST -d'{"Name":"Nagu Kothapalli","Gender":"male","Age":50,"Id":"a@b.com"}' http://localhost:8080/create
+//curl -vvv -H "Content-Type: application/json" -X POST -d'{"Name":"Nagu Kothapalli","Gender":"male","Age":25,"Id":"a@b.com"}' http://localhost:8080/create
 func (userRestController UserRestController) CreateUser(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 
 	newuser := models.User{}
